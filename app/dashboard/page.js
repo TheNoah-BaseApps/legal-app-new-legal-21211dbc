@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import StatsCard from '@/components/dashboard/StatsCard';
 import WorkflowProgress from '@/components/dashboard/WorkflowProgress';
-import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare, DollarSign, ShieldCheck } from 'lucide-react';
+import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare, DollarSign, ShieldCheck, AlertTriangle } from 'lucide-react';
 import BreadcrumbNavigation from '@/components/layout/BreadcrumbNavigation';
 import Link from 'next/link';
 
@@ -112,7 +112,7 @@ export default function DashboardPage() {
 
       <WorkflowProgress stats={stats} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Link href="/documents">
           <Card className="cursor-pointer hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -163,6 +163,36 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">Track regulatory compliance and audits</p>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/contracts">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Contract Management</CardTitle>
+              <FileText className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Manage legal contracts and agreements</p>
+              {stats?.activeContracts !== undefined && (
+                <p className="text-2xl font-bold mt-2">{stats.activeContracts}</p>
+              )}
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/risks">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Risk Management</CardTitle>
+              <AlertTriangle className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Identify and mitigate legal risks</p>
+              {stats?.activeRisks !== undefined && (
+                <p className="text-2xl font-bold mt-2">{stats.activeRisks}</p>
+              )}
             </CardContent>
           </Card>
         </Link>

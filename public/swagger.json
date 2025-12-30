@@ -477,6 +477,261 @@
         }
       }
     },
+    "/api/contracts/{id}": {
+      "get": {
+        "summary": "Get contract by ID",
+        "description": "Retrieve a specific contract by its ID",
+        "tags": [
+          "Contracts"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Contract ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract retrieved successfully"
+          },
+          "404": {
+            "description": "Contract not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update contract",
+        "description": "Update an existing contract",
+        "tags": [
+          "Contracts"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contract_title": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string"
+                  },
+                  "end_date": {
+                    "type": "string"
+                  },
+                  "contract_value": {
+                    "type": "number"
+                  },
+                  "contract_status": {
+                    "type": "string"
+                  },
+                  "signed_by": {
+                    "type": "string"
+                  },
+                  "renewal_terms": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contract updated successfully"
+          },
+          "404": {
+            "description": "Contract not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete contract",
+        "description": "Delete a contract by ID",
+        "tags": [
+          "Contracts"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract deleted successfully"
+          },
+          "404": {
+            "description": "Contract not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/contracts": {
+      "get": {
+        "summary": "Get all contracts",
+        "description": "Retrieve a list of all legal contracts with pagination and filtering",
+        "tags": [
+          "Contracts"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by contract status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of contracts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new contract",
+        "description": "Add a new legal contract to the system",
+        "tags": [
+          "Contracts"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "contract_id",
+                  "contract_title",
+                  "client_id",
+                  "start_date",
+                  "end_date",
+                  "contract_value",
+                  "contract_status",
+                  "signed_by"
+                ],
+                "properties": {
+                  "contract_id": {
+                    "type": "string"
+                  },
+                  "contract_title": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "contract_value": {
+                    "type": "number"
+                  },
+                  "contract_status": {
+                    "type": "string"
+                  },
+                  "signed_by": {
+                    "type": "string"
+                  },
+                  "renewal_terms": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contract created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "summary": "Get customer by ID",
@@ -1326,6 +1581,265 @@
         "responses": {
           "200": {
             "description": "Exported data"
+          }
+        }
+      }
+    },
+    "/api/risks/{id}": {
+      "get": {
+        "summary": "Get risk by ID",
+        "description": "Retrieve a specific risk by its ID",
+        "tags": [
+          "Risk Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Risk ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Risk retrieved successfully"
+          },
+          "404": {
+            "description": "Risk not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update risk",
+        "description": "Update an existing risk",
+        "tags": [
+          "Risk Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "risk_type": {
+                    "type": "string"
+                  },
+                  "risk_description": {
+                    "type": "string"
+                  },
+                  "risk_severity": {
+                    "type": "string"
+                  },
+                  "mitigation_plan": {
+                    "type": "string"
+                  },
+                  "review_date": {
+                    "type": "string"
+                  },
+                  "risk_status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Risk updated successfully"
+          },
+          "404": {
+            "description": "Risk not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete risk",
+        "description": "Delete a risk by ID",
+        "tags": [
+          "Risk Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Risk deleted successfully"
+          },
+          "404": {
+            "description": "Risk not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/risks": {
+      "get": {
+        "summary": "Get all risks",
+        "description": "Retrieve a list of all legal risks with pagination and filtering",
+        "tags": [
+          "Risk Management"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "severity",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by risk severity"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by risk status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of risks retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new risk",
+        "description": "Add a new legal risk to the system",
+        "tags": [
+          "Risk Management"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "risk_id",
+                  "risk_type",
+                  "risk_description",
+                  "identified_by",
+                  "identified_date",
+                  "risk_severity",
+                  "risk_status"
+                ],
+                "properties": {
+                  "risk_id": {
+                    "type": "string"
+                  },
+                  "risk_type": {
+                    "type": "string"
+                  },
+                  "risk_description": {
+                    "type": "string"
+                  },
+                  "identified_by": {
+                    "type": "string"
+                  },
+                  "identified_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "risk_severity": {
+                    "type": "string"
+                  },
+                  "mitigation_plan": {
+                    "type": "string"
+                  },
+                  "review_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "risk_status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Risk created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
