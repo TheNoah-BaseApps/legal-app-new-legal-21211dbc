@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText } from 'lucide-react';
+import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText, CheckSquare } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -11,6 +11,8 @@ const navigation = [
   { name: 'Cases', href: '/cases', icon: Briefcase },
   { name: 'Engagements', href: '/engagements', icon: MessageSquare },
   { name: 'Reports', href: '/reports', icon: FileText },
+  { name: 'Documents', href: '/documents', icon: FileText },
+  { name: 'Tasks', href: '/tasks', icon: CheckSquare },
 ];
 
 export default function Sidebar({ collapsed }) {

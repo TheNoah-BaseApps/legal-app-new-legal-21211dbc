@@ -385,6 +385,245 @@
         }
       }
     },
+    "/api/documents/{id}": {
+      "get": {
+        "summary": "Get a document by ID",
+        "description": "Retrieve details of a specific legal document",
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Document ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document retrieved successfully"
+          },
+          "404": {
+            "description": "Document not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a document",
+        "description": "Update an existing legal document",
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Document ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "document_title": {
+                    "type": "string"
+                  },
+                  "document_type": {
+                    "type": "string"
+                  },
+                  "document_status": {
+                    "type": "string"
+                  },
+                  "document_version": {
+                    "type": "string"
+                  },
+                  "storage_location": {
+                    "type": "string"
+                  },
+                  "associated_case_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document updated successfully"
+          },
+          "404": {
+            "description": "Document not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a document",
+        "description": "Remove a legal document from the system",
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Document ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document deleted successfully"
+          },
+          "404": {
+            "description": "Document not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/documents": {
+      "get": {
+        "summary": "Get all legal documents",
+        "description": "Retrieve a list of all legal documents with optional filtering",
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "case_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by associated case ID"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by document status"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by document type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of documents retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new legal document",
+        "description": "Add a new document to the system",
+        "tags": [
+          "Documents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "document_title",
+                  "document_type",
+                  "uploaded_by",
+                  "storage_location",
+                  "document_status",
+                  "document_version"
+                ],
+                "properties": {
+                  "document_title": {
+                    "type": "string"
+                  },
+                  "document_type": {
+                    "type": "string"
+                  },
+                  "uploaded_by": {
+                    "type": "string"
+                  },
+                  "associated_case_id": {
+                    "type": "string"
+                  },
+                  "storage_location": {
+                    "type": "string"
+                  },
+                  "document_status": {
+                    "type": "string"
+                  },
+                  "document_version": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Document created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/engagements/{id}": {
       "get": {
         "summary": "Get engagement by ID",
@@ -626,6 +865,257 @@
         "responses": {
           "200": {
             "description": "Exported data"
+          }
+        }
+      }
+    },
+    "/api/tasks/{id}": {
+      "get": {
+        "summary": "Get a task by ID",
+        "description": "Retrieve details of a specific legal task",
+        "tags": [
+          "Tasks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Task ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task retrieved successfully"
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a task",
+        "description": "Update an existing legal task",
+        "tags": [
+          "Tasks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Task ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task_title": {
+                    "type": "string"
+                  },
+                  "assigned_to": {
+                    "type": "string"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "task_status": {
+                    "type": "string"
+                  },
+                  "priority_level": {
+                    "type": "string"
+                  },
+                  "related_case_id": {
+                    "type": "string"
+                  },
+                  "task_description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated successfully"
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task",
+        "description": "Remove a legal task from the system",
+        "tags": [
+          "Tasks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Task ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task deleted successfully"
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/tasks": {
+      "get": {
+        "summary": "Get all legal tasks",
+        "description": "Retrieve a list of all legal tasks with optional filtering",
+        "tags": [
+          "Tasks"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "case_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by related case ID"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by task status"
+          },
+          {
+            "in": "query",
+            "name": "assigned_to",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by assigned person"
+          },
+          {
+            "in": "query",
+            "name": "priority",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by priority level"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tasks retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new legal task",
+        "description": "Add a new task to the system",
+        "tags": [
+          "Tasks"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "task_title",
+                  "assigned_to",
+                  "due_date",
+                  "task_status",
+                  "priority_level"
+                ],
+                "properties": {
+                  "task_title": {
+                    "type": "string"
+                  },
+                  "assigned_to": {
+                    "type": "string"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "task_status": {
+                    "type": "string"
+                  },
+                  "priority_level": {
+                    "type": "string"
+                  },
+                  "related_case_id": {
+                    "type": "string"
+                  },
+                  "task_description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }

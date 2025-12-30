@@ -6,8 +6,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import StatsCard from '@/components/dashboard/StatsCard';
 import WorkflowProgress from '@/components/dashboard/WorkflowProgress';
-import { Users, Briefcase, MessageSquare, TrendingUp } from 'lucide-react';
+import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare } from 'lucide-react';
 import BreadcrumbNavigation from '@/components/layout/BreadcrumbNavigation';
+import Link from 'next/link';
 
 export default function DashboardPage() {
   const [stats, setStats] = useState(null);
@@ -110,6 +111,38 @@ export default function DashboardPage() {
       </div>
 
       <WorkflowProgress stats={stats} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link href="/documents">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Legal Documents</CardTitle>
+              <FileText className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Manage and track legal documents</p>
+              {stats?.totalDocuments !== undefined && (
+                <p className="text-2xl font-bold mt-2">{stats.totalDocuments}</p>
+              )}
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/tasks">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Legal Tasks</CardTitle>
+              <CheckSquare className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Assign and track legal tasks</p>
+              {stats?.totalTasks !== undefined && (
+                <p className="text-2xl font-bold mt-2">{stats.totalTasks}</p>
+              )}
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
