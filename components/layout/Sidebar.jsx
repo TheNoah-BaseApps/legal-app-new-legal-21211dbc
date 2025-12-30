@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText, CheckSquare, DollarSign, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText, CheckSquare, DollarSign, ShieldCheck, AlertTriangle, Scale } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Customers', href: '/customers', icon: Users },
   { name: 'Cases', href: '/cases', icon: Briefcase },
+  { name: 'Matters', href: '/matters', icon: Scale },
   { name: 'Engagements', href: '/engagements', icon: MessageSquare },
   { name: 'Reports', href: '/reports', icon: FileText },
   { name: 'Documents', href: '/documents', icon: FileText },
@@ -16,6 +17,7 @@ const navigation = [
   { name: 'Invoices', href: '/invoices', icon: DollarSign },
   { name: 'Compliance', href: '/compliance', icon: ShieldCheck },
   { name: 'Contracts', href: '/contracts', icon: FileText },
+  { name: 'Transactions', href: '/transactions', icon: DollarSign },
   { name: 'Risk Management', href: '/risks', icon: AlertTriangle },
 ];
 

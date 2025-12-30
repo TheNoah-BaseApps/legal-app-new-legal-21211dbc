@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import StatsCard from '@/components/dashboard/StatsCard';
 import WorkflowProgress from '@/components/dashboard/WorkflowProgress';
-import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare, DollarSign, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare, DollarSign, ShieldCheck, AlertTriangle, Scale } from 'lucide-react';
 import BreadcrumbNavigation from '@/components/layout/BreadcrumbNavigation';
 import Link from 'next/link';
 
@@ -193,6 +193,30 @@ export default function DashboardPage() {
               {stats?.activeRisks !== undefined && (
                 <p className="text-2xl font-bold mt-2">{stats.activeRisks}</p>
               )}
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/transactions">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Transaction Management</CardTitle>
+              <DollarSign className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Track and manage legal transactions</p>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/matters">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Matter Management</CardTitle>
+              <Scale className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Track and manage legal matters and cases</p>
             </CardContent>
           </Card>
         </Link>

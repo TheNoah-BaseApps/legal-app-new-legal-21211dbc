@@ -1549,6 +1549,252 @@
         }
       }
     },
+    "/api/matters/{id}": {
+      "get": {
+        "summary": "Get matter by ID",
+        "description": "Retrieve a specific matter by its ID",
+        "tags": [
+          "Matters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matter retrieved successfully"
+          },
+          "404": {
+            "description": "Matter not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update matter",
+        "description": "Update an existing matter",
+        "tags": [
+          "Matters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Matter updated successfully"
+          },
+          "404": {
+            "description": "Matter not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete matter",
+        "description": "Delete a matter by ID",
+        "tags": [
+          "Matters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matter deleted successfully"
+          },
+          "404": {
+            "description": "Matter not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/matters": {
+      "get": {
+        "summary": "Get all legal matters",
+        "description": "Retrieve a list of all legal matters with pagination support",
+        "tags": [
+          "Matters"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by matter status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matters retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new matter",
+        "description": "Create a new legal matter record",
+        "tags": [
+          "Matters"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "matter_id",
+                  "matter_title",
+                  "matter_type",
+                  "client_id",
+                  "attorney_assigned",
+                  "open_date",
+                  "matter_status",
+                  "jurisdiction"
+                ],
+                "properties": {
+                  "matter_id": {
+                    "type": "string"
+                  },
+                  "matter_title": {
+                    "type": "string"
+                  },
+                  "matter_description": {
+                    "type": "string"
+                  },
+                  "matter_type": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "attorney_assigned": {
+                    "type": "string"
+                  },
+                  "open_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "matter_status": {
+                    "type": "string"
+                  },
+                  "jurisdiction": {
+                    "type": "string"
+                  },
+                  "opposing_party": {
+                    "type": "string"
+                  },
+                  "key_deadlines": {
+                    "type": "string"
+                  },
+                  "amount_billed": {
+                    "type": "number"
+                  },
+                  "matter_outcome": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Matter created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/reports/export": {
       "get": {
         "summary": "Export data in various formats",
@@ -2085,6 +2331,241 @@
         "responses": {
           "201": {
             "description": "Task created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/transactions/{id}": {
+      "get": {
+        "summary": "Get transaction by ID",
+        "description": "Retrieve a specific transaction by its ID",
+        "tags": [
+          "Transactions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction retrieved successfully"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update transaction",
+        "description": "Update an existing transaction",
+        "tags": [
+          "Transactions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction updated successfully"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete transaction",
+        "description": "Delete a transaction by ID",
+        "tags": [
+          "Transactions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction deleted successfully"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/transactions": {
+      "get": {
+        "summary": "Get all legal transactions",
+        "description": "Retrieve a list of all legal transactions with pagination support",
+        "tags": [
+          "Transactions"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by approval status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new transaction",
+        "description": "Create a new legal transaction record",
+        "tags": [
+          "Transactions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "transaction_id",
+                  "transaction_type",
+                  "client_id",
+                  "transaction_date",
+                  "transaction_value",
+                  "legal_advisor",
+                  "approval_status"
+                ],
+                "properties": {
+                  "transaction_id": {
+                    "type": "string"
+                  },
+                  "transaction_type": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "transaction_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "transaction_value": {
+                    "type": "number"
+                  },
+                  "legal_advisor": {
+                    "type": "string"
+                  },
+                  "related_contract_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "approval_status": {
+                    "type": "string"
+                  },
+                  "closing_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created successfully"
           },
           "400": {
             "description": "Invalid input"
