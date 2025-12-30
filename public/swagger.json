@@ -247,6 +247,236 @@
         }
       }
     },
+    "/api/compliance/{id}": {
+      "get": {
+        "summary": "Get a specific legal compliance record",
+        "description": "Retrieve details of a specific legal compliance check by ID",
+        "tags": [
+          "Legal Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Compliance record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compliance record details"
+          },
+          "404": {
+            "description": "Compliance record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a legal compliance record",
+        "description": "Update an existing legal compliance check",
+        "tags": [
+          "Legal Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Compliance record updated successfully"
+          },
+          "404": {
+            "description": "Compliance record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a legal compliance record",
+        "description": "Delete a legal compliance check by ID",
+        "tags": [
+          "Legal Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compliance record deleted successfully"
+          },
+          "404": {
+            "description": "Compliance record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/compliance": {
+      "get": {
+        "summary": "Get all legal compliance records",
+        "description": "Retrieve a list of all legal compliance checks with pagination and filtering",
+        "tags": [
+          "Legal Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by compliance status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of legal compliance records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new legal compliance record",
+        "description": "Create a new legal compliance check record",
+        "tags": [
+          "Legal Compliance"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "compliance_id",
+                  "regulation_name",
+                  "entity_checked",
+                  "compliance_date",
+                  "compliance_status",
+                  "responsible_officer"
+                ],
+                "properties": {
+                  "compliance_id": {
+                    "type": "string"
+                  },
+                  "regulation_name": {
+                    "type": "string"
+                  },
+                  "entity_checked": {
+                    "type": "string"
+                  },
+                  "compliance_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "compliance_status": {
+                    "type": "string"
+                  },
+                  "responsible_officer": {
+                    "type": "string"
+                  },
+                  "action_required": {
+                    "type": "string"
+                  },
+                  "next_review_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Compliance record created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "summary": "Get customer by ID",
@@ -829,6 +1059,237 @@
           },
           "400": {
             "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/api/invoices/{id}": {
+      "get": {
+        "summary": "Get a specific legal invoice",
+        "description": "Retrieve details of a specific legal invoice by ID",
+        "tags": [
+          "Legal Invoices"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Invoice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice details"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a legal invoice",
+        "description": "Update an existing legal invoice",
+        "tags": [
+          "Legal Invoices"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Invoice updated successfully"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a legal invoice",
+        "description": "Delete a legal invoice by ID",
+        "tags": [
+          "Legal Invoices"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice deleted successfully"
+          },
+          "404": {
+            "description": "Invoice not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/invoices": {
+      "get": {
+        "summary": "Get all legal invoices",
+        "description": "Retrieve a list of all legal invoices with pagination and filtering",
+        "tags": [
+          "Legal Invoices"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by invoice status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of legal invoices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new legal invoice",
+        "description": "Create a new legal invoice record",
+        "tags": [
+          "Legal Invoices"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "invoice_id",
+                  "client_id",
+                  "invoice_date",
+                  "due_date",
+                  "invoice_amount",
+                  "tax_amount",
+                  "invoice_status"
+                ],
+                "properties": {
+                  "invoice_id": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "case_id": {
+                    "type": "string"
+                  },
+                  "invoice_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "invoice_amount": {
+                    "type": "number"
+                  },
+                  "tax_amount": {
+                    "type": "number"
+                  },
+                  "invoice_status": {
+                    "type": "string"
+                  },
+                  "payment_reference": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Invoice created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }

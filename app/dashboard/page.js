@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import StatsCard from '@/components/dashboard/StatsCard';
 import WorkflowProgress from '@/components/dashboard/WorkflowProgress';
-import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare } from 'lucide-react';
+import { Users, Briefcase, MessageSquare, TrendingUp, FileText, CheckSquare, DollarSign, ShieldCheck } from 'lucide-react';
 import BreadcrumbNavigation from '@/components/layout/BreadcrumbNavigation';
 import Link from 'next/link';
 
@@ -112,7 +112,7 @@ export default function DashboardPage() {
 
       <WorkflowProgress stats={stats} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Link href="/documents">
           <Card className="cursor-pointer hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -139,6 +139,30 @@ export default function DashboardPage() {
               {stats?.totalTasks !== undefined && (
                 <p className="text-2xl font-bold mt-2">{stats.totalTasks}</p>
               )}
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/invoices">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Legal Invoices</CardTitle>
+              <DollarSign className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Manage billing and invoicing for legal services</p>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/compliance">
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-lg font-medium">Compliance Management</CardTitle>
+              <ShieldCheck className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Track regulatory compliance and audits</p>
             </CardContent>
           </Card>
         </Link>

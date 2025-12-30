@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText, CheckSquare } from 'lucide-react';
+import { LayoutDashboard, Users, Briefcase, MessageSquare, FileText, CheckSquare, DollarSign, ShieldCheck } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -13,6 +13,8 @@ const navigation = [
   { name: 'Reports', href: '/reports', icon: FileText },
   { name: 'Documents', href: '/documents', icon: FileText },
   { name: 'Tasks', href: '/tasks', icon: CheckSquare },
+  { name: 'Invoices', href: '/invoices', icon: DollarSign },
+  { name: 'Compliance', href: '/compliance', icon: ShieldCheck },
 ];
 
 export default function Sidebar({ collapsed }) {
